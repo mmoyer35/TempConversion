@@ -1,28 +1,39 @@
 var cities = "Albany|22.2*Caribou|9.5*Columbia|44.6*Denver|29.2*Indianapolis|26.5*Montgomery|46.6*San Diego|57.8*Tulsa|36.4*Tampa|61.3*Billings|24.0"
 var final_array = []
-// Cold - less than 20 
-// Moderate - Between 20 and 30
-// Hot - Above 30
-// Output format
-// Cold:
-
-// Chicago (18)
-// Los Angeles (15)
-
+var cold_cities =[]
+var moderate_cities = []
+var hot_cities = []
 
 city_arr = cities.split("|").join(",").split('*')
 for (var i = 0; i < city_arr.length; i++){
   farenheit = city_arr[i].split(',')[1]
   celc = Math.round((farenheit - 32) *(5/9))
-//   console.log(city_arr[i])
-//   console.log(celc)
   city = city_arr[i].split(',')[0]
-  final_array.push(city,celc)
+  final_array.push([city,celc])
+  
+}
+for (var item = 0; item < final_array.length; item++){
+  if (final_array[item][1] < 20){
+    cold_cities.push(final_array[item])
+  }else if (final_array[item][1] > 30){
+    hot_cities.push(final_array[item])
+  }else{
+    moderate_cities.push(final_array[item])
+  }
   
 }
 
-console.log(final_array)
 
-// celc = (temp - 32)  * (5/9)
+function printTemp(value, index, array) {
+  console.log(value[0] + "(" +value[1] +")")
+}
 
-// .filtered 
+//Print statement
+console.log("Cold:")
+cold_cities.forEach(printTemp)
+
+console.log("Moderate:")
+moderate_cities.forEach(printTemp)
+console.log("Hot:")
+hot_cities.forEach(printTemp)
+
