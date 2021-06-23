@@ -1,8 +1,12 @@
+//create the arrays used later
+//MMoyer TODO: refactor at a later time to use filter instead of an if/else statement
 var cities = "Albany|22.2*Caribou|9.5*Columbia|44.6*Denver|29.2*Indianapolis|26.5*Montgomery|46.6*San Diego|57.8*Tulsa|36.4*Tampa|61.3*Billings|24.0"
 var final_array = []
 var cold_cities =[]
 var moderate_cities = []
 var hot_cities = []
+
+//splits the cities array based off "|" character, rejoins and splits again based on the "*" in order to get touples of each city
 
 city_arr = cities.split("|").join(",").split('*')
 for (var i = 0; i < city_arr.length; i++){
@@ -10,8 +14,11 @@ for (var i = 0; i < city_arr.length; i++){
   celc = Math.round((farenheit - 32) *(5/9))
   city = city_arr[i].split(',')[0]
   final_array.push([city,celc])
-  
 }
+
+//goes through the final_array and determines the temperature benchmark (Cold, Moderate, Hot)
+//tried using filter but was having issues keeping both the city and temp together
+
 for (var item = 0; item < final_array.length; item++){
   if (final_array[item][1] < 20){
     cold_cities.push(final_array[item])
@@ -20,20 +27,19 @@ for (var item = 0; item < final_array.length; item++){
   }else{
     moderate_cities.push(final_array[item])
   }
-  
 }
 
-
+//print temp function to format output text
 function printTemp(value, index, array) {
   console.log(value[0] + "(" +value[1] +")")
 }
 
-//Print statement
+//Print statements
 console.log("Cold:")
 cold_cities.forEach(printTemp)
-
 console.log("Moderate:")
 moderate_cities.forEach(printTemp)
 console.log("Hot:")
 hot_cities.forEach(printTemp)
+
 
